@@ -30,7 +30,7 @@ A full-stack Student Management System built with Flask backend and vanilla HTML
 
 ## 🚀 Live Demo
 
-- **Frontend**: [GitHub Pages](https://your-username.github.io/student-management-system/)
+- **Frontend**: [GitHub Pages](https://reddy672.github.io/student-management-system/)
 - **Backend API**: [Railway](https://student-management-system-backend-production.up.railway.app)
 
 ## 📁 Project Structure
