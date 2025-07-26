@@ -6,137 +6,152 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   min-height: 100vh;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  margin-top: 40px;
+  padding: 40px 30px 30px 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  width: 100%;
+  max-width: 480px;
 }
 
 h1 {
   text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 2.5rem;
-  font-weight: 300;
-}
-
-h2 {
-  color: #555;
-  margin: 30px 0 20px 0;
-  font-size: 1.8rem;
-  font-weight: 400;
+  color: #2d3a4b;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
-  padding: 25px;
-  background: #f8f9fa;
-  border-radius: 15px;
+  gap: 14px;
+  margin-bottom: 32px;
 }
 
 form input {
-  padding: 15px;
-  font-size: 16px;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  transition: border-color 0.3s ease;
+  padding: 13px 12px;
+  font-size: 1rem;
+  border: 1.5px solid #e0e7ef;
+  border-radius: 8px;
+  background: #f7fafc;
+  transition: border-color 0.2s;
 }
 
 form input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #7f9cf5;
+  background: #e9f1fb;
 }
 
 form button {
-  padding: 15px;
-  font-size: 16px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  padding: 13px;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.08);
+  transition: background 0.2s, transform 0.2s;
 }
 
 form button:hover {
-  transform: translateY(-2px);
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+h2 {
+  text-align: center;
+  color: #3a4756;
+  font-size: 1.4rem;
+  margin: 30px 0 18px 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 #studentList {
-  display: grid;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
 }
 
 .student-card {
-  background: white;
-  border: 2px solid #e9ecef;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(60, 60, 120, 0.07);
+  padding: 20px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-left: 5px solid #7f9cf5;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .student-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 18px rgba(60, 60, 120, 0.13);
+  border-color: #43e97b;
 }
 
-.student-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
+.student-card span {
+  font-size: 1.08rem;
+  color: #2d3a4b;
+  margin-bottom: 2px;
 }
 
-.student-info span {
-  font-size: 16px;
-  color: #555;
-}
-
-.student-info strong {
-  color: #333;
-  font-weight: 600;
+.student-card strong {
+  color: #3a4756;
+  font-weight: 700;
 }
 
 .student-actions {
+  margin-top: 8px;
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 .student-actions button {
-  padding: 10px 20px;
+  padding: 7px 18px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 7px;
+  font-size: 1rem;
   font-weight: 600;
-  transition: transform 0.2s ease;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-.student-actions button:hover {
-  transform: translateY(-2px);
+.student-actions .edit-btn {
+  background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+  color: #2d3a4b;
 }
 
-.edit-btn {
-  background: #ffc107;
-  color: #333;
+.student-actions .edit-btn:hover {
+  background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+  transform: scale(1.05);
 }
 
-.delete-btn {
-  background: #dc3545;
-  color: white;
+.student-actions .delete-btn {
+  background: linear-gradient(90deg, #f857a6 0%, #ff5858 100%);
+  color: #fff;
+}
+
+.student-actions .delete-btn:hover {
+  background: linear-gradient(90deg, #ff5858 0%, #f857a6 100%);
+  transform: scale(1.05);
 }
 
 .loading {
@@ -163,21 +178,17 @@ form button:hover {
   border: 1px solid #c3e6cb;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .container {
-    padding: 20px;
-    margin: 10px;
+    padding: 18px 5px 18px 5px;
+    margin-top: 10px;
+    max-width: 98vw;
   }
-  
-  h1 {
-    font-size: 2rem;
+  form input, form button {
+    font-size: 0.98rem;
+    padding: 10px;
   }
-  
-  .student-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .student-actions {
-    justify-content: center;
+  .student-card {
+    padding: 13px 8px 10px 8px;
   }
 } 

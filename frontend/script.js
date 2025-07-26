@@ -17,7 +17,7 @@ function showMessage(message, type = 'success') {
   
   setTimeout(() => {
     messageDiv.remove();
-  }, 3000);
+  }, 4000);
 }
 
 // Handle form submit (Add or Update)
@@ -25,17 +25,22 @@ document.getElementById("studentForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const id = document.getElementById("studentId").value;
-  const name = document.getElementById("name").value;
+  const name = document.getElementById("name").value.trim();
   const marks = parseInt(document.getElementById("marks").value);
   const attendance = parseInt(document.getElementById("attendance").value);
 
   // Validation
-  if (marks < 0 || marks > 100) {
+  if (!name) {
+    showMessage("Please enter a student name", "error");
+    return;
+  }
+  
+  if (isNaN(marks) || marks < 0 || marks > 100) {
     showMessage("Marks must be between 0 and 100", "error");
     return;
   }
   
-  if (attendance < 0 || attendance > 100) {
+  if (isNaN(attendance) || attendance < 0 || attendance > 100) {
     showMessage("Attendance must be between 0 and 100", "error");
     return;
   }
@@ -51,7 +56,12 @@ document.getElementById("studentForm").addEventListener("submit", async (e) => {
         body: JSON.stringify(studentData),
       });
       
-      if (!response.ok) throw new Error('Failed to update student');
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to update student');
+      }
+      
       showMessage("Student updated successfully!");
     } else {
       // Add new student
@@ -61,7 +71,12 @@ document.getElementById("studentForm").addEventListener("submit", async (e) => {
         body: JSON.stringify(studentData),
       });
       
-      if (!response.ok) throw new Error('Failed to add student');
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to add student');
+      }
+      
       showMessage("Student added successfully!");
     }
 
@@ -81,33 +96,30 @@ async function loadStudents() {
 
   try {
     const response = await fetch(`${API_URL}/students`);
-    if (!response.ok) throw new Error('Failed to fetch students');
+    const result = await response.json();
     
-    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to fetch students');
+    }
+    
     list.innerHTML = "";
 
-    if (data.length === 0) {
+    if (result.length === 0) {
       list.innerHTML = '<div class="loading">No students found. Add your first student!</div>';
       return;
     }
 
-    data.forEach((student) => {
+    result.forEach((student) => {
       const card = document.createElement("div");
       card.className = "student-card";
 
       card.innerHTML = `
-        <div class="student-info">
-          <span><strong>Name:</strong> ${student.name}</span>
-          <span><strong>Marks:</strong> ${student.marks}/100</span>
-          <span><strong>Attendance:</strong> ${student.attendance}%</span>
-        </div>
+        <span><strong>Name:</strong> ${student.name}</span>
+        <span><strong>Marks:</strong> ${student.marks}</span>
+        <span><strong>Attendance:</strong> ${student.attendance}%</span>
         <div class="student-actions">
-          <button class="edit-btn" onclick="editStudent(${student.id}, '${student.name}', ${student.marks}, ${student.attendance})">
-            Edit
-          </button>
-          <button class="delete-btn" onclick="deleteStudent(${student.id})">
-            Delete
-          </button>
+          <button class="edit-btn" onclick="editStudent(${student.id}, '${student.name}', ${student.marks}, ${student.attendance})">Edit</button>
+          <button class="delete-btn" onclick="deleteStudent(${student.id})">Delete</button>
         </div>
       `;
 
@@ -141,7 +153,11 @@ async function deleteStudent(id) {
       method: "DELETE" 
     });
     
-    if (!response.ok) throw new Error('Failed to delete student');
+    const result = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to delete student');
+    }
     
     showMessage("Student deleted successfully!");
     loadStudents();
