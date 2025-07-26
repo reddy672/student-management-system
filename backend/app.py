@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -42,6 +43,7 @@ def add_student():
     conn.commit()
     conn.close()
     return jsonify({"message": "Student added"})
+
 @app.route('/students/<int:id>', methods=['PUT'])
 def update_student(id):
     data = request.json
@@ -56,7 +58,6 @@ def update_student(id):
     conn.close()
     return jsonify({"message": "Student updated"})
 
-
 @app.route('/students/<int:id>', methods=['DELETE'])
 def delete_student(id):
     conn = sqlite3.connect('database.db')
@@ -68,7 +69,8 @@ def delete_student(id):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return jsonify({"message": "Student Management System API"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False) 
