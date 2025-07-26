@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Student Management System</h1>
+
+    <form id="studentForm">
+      <input type="hidden" id="studentId" />
+      <input type="text" id="name" placeholder="Enter Student Name" required />
+      <input type="number" id="marks" placeholder="Enter Marks" required />
+      <input type="number" id="attendance" placeholder="Enter Attendance (%)" required />
+      <button type="submit">Save</button>
+    </form>
+
+    <h2>Student List</h2>
+    <ul id="studentList"></ul>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
